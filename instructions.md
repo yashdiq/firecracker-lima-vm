@@ -149,7 +149,7 @@ API_SOCKET="/tmp/firecracker.socket"
 sudo rm -f $API_SOCKET
 
 # Start Firecracker with PCI support
-sudo ./firecracker --api-sock "${API_SOCKET}" --enable-pci
+sudo firecracker --api-sock "${API_SOCKET}" --enable-pci
 ```
 
 > 🎯 **Firecracker is now running!** Leave this terminal open.
