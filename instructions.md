@@ -27,8 +27,27 @@ limactl start --set '.nestedVirtualization=true' --name=mvm template://default
 ```bash
 limactl shell mvm
 
+# Check if kvm group exists, if not
+newgrp kvm
+
+# Verify by
+grep kvm /etc/group
+
 # Add user to kvm group for proper permissions
 sudo usermod -aG kvm $USER
+
+# If it's not working, do this
+sudo adduser $USER kvm
+
+# to make it persistance, you can do this too
+sudo vi /etc/udev/rules.d/99-kvm.rules
+# add this line:
+KERNEL=="kvm", GROUP="kvm", MODE="0660"
+# reload the rules
+sudo udevadm control --reload-rules
+
+# and then verify again by
+groups | grep kvm
 
 # Exit the Lima VM to apply group changes
 exit
